@@ -1,0 +1,26 @@
+version : "3.2"
+services: 
+ node_project:
+  build: 
+   context: .
+   args:
+     NODE_ENV: development
+  ports:
+   - "3000:3000"
+  environment: 
+   - PORT=3000
+  depends_on:
+   - mongo_db
+  
+ mongo_db:
+  image: mongo:4.4.20-rc0-focal
+  environment:
+   MONGO_INITDB_ROOT_USERNAME: mongo
+   MONGO_INITDB_ROOT_PASSWORD: mypassword
+  volumes:
+   - mongo_db:/data/db
+
+   
+volumes:
+ mongo_db:
+   
